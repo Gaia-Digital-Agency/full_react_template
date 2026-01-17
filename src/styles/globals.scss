@@ -1,0 +1,392 @@
+/**
+ * ==========================================================================
+ * GLOBAL STYLES
+ * ==========================================================================
+ * 
+ * Global styles and CSS custom properties for the entire application.
+ * Includes:
+ * - CSS custom properties (CSS variables)
+ * - Base element resets
+ * - Utility classes
+ * - Component-level defaults
+ * - Smooth scrolling and accessibility
+ */
+
+// ==========================================================================
+// CSS CUSTOM PROPERTIES (Root Variables)
+// ==========================================================================
+
+:root {
+  /* Color scheme preference */
+  color-scheme: light dark;
+
+  /* Primary brand colors */
+  --color-primary: #{$color-primary-500};
+  --color-primary-light: #{$color-primary-400};
+  --color-primary-dark: #{$color-primary-600};
+
+  /* Accent colors */
+  --color-accent: #{$color-accent-500};
+  --color-accent-light: #{$color-accent-400};
+
+  /* Background colors */
+  --color-bg: #{$color-neutral-50};
+  --color-bg-secondary: #{$color-neutral-100};
+  --color-bg-tertiary: #{$color-neutral-200};
+
+  /* Text colors */
+  --color-text: #{$color-neutral-900};
+  --color-text-secondary: #{$color-neutral-800};
+  --color-text-muted: #64748b;
+
+  /* Border colors */
+  --color-border: #{$color-neutral-200};
+  --color-border-light: rgba(0, 0, 0, 0.05);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.05);
+
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Z-index scale */
+  --z-dropdown: 50;
+  --z-sticky: 60;
+  --z-modal: 70;
+  --z-tooltip: 80;
+}
+
+/* Dark mode color overrides */
+.dark {
+  --color-bg: #{$color-neutral-950};
+  --color-bg-secondary: #{$color-neutral-900};
+  --color-bg-tertiary: #{$color-neutral-800};
+  --color-text: #{$color-neutral-50};
+  --color-text-secondary: #{$color-neutral-100};
+  --color-text-muted: #94a3b8;
+  --color-border: #{$color-neutral-800};
+  --color-border-light: rgba(255, 255, 255, 0.05);
+}
+
+// ==========================================================================
+// BASE RESETS & DEFAULTS
+// ==========================================================================
+
+/**
+ * Modern CSS reset with accessibility considerations
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * HTML root settings
+ * - Smooth scrolling for anchor links
+ * - Prevent horizontal overflow
+ * - Better text rendering
+ */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  
+  /* Respect user preference for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+/**
+ * Body defaults
+ * - Use custom font family
+ * - Set text color and background
+ * - Enable font smoothing for better rendering
+ */
+body {
+  font-family: $font-body;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+  
+  /* Ensure proper safe area insets on iOS */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/**
+ * Heading defaults
+ * - Use display font family
+ * - Balanced text wrapping for headings
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  font-weight: $font-weight-semibold;
+  line-height: 1.2;
+  text-wrap: balance;
+  color: var(--color-text);
+}
+
+/**
+ * Paragraph and text defaults
+ * - Pretty text wrapping
+ * - Secondary text color for contrast
+ */
+p {
+  text-wrap: pretty;
+  color: var(--color-text-secondary);
+}
+
+/**
+ * Link defaults
+ * - Inherit color by default
+ * - Remove underline
+ * - Smooth transition for hover states
+ */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+/**
+ * Image defaults
+ * - Responsive by default
+ * - Remove gap below images
+ */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+ * Form element defaults
+ * - Inherit font from parent
+ */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/**
+ * Button defaults
+ * - Remove default styling
+ * - Set cursor
+ */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/**
+ * List defaults
+ * - Remove default list styling
+ */
+ul, ol {
+  list-style: none;
+}
+
+/**
+ * Table defaults
+ * - Collapse borders
+ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// ==========================================================================
+// ACCESSIBILITY
+// ==========================================================================
+
+/**
+ * Focus visible styles
+ * - Show focus ring only for keyboard navigation
+ * - Uses :focus-visible for modern browsers
+ */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/**
+ * Skip link for keyboard navigation
+ * - Hidden by default
+ * - Appears when focused
+ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-md);
+  z-index: 100;
+  
+  &:focus {
+    top: 1rem;
+  }
+}
+
+/**
+ * Screen reader only utility
+ * - Visually hidden but accessible to screen readers
+ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ==========================================================================
+// UTILITY CLASSES
+// ==========================================================================
+
+/**
+ * Container utilities
+ * - Centered content with max-width
+ * - Responsive padding
+ */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  
+  @include respond-to('sm') {
+    padding-inline: 1.5rem;
+  }
+  
+  @include respond-to('lg') {
+    padding-inline: 2rem;
+  }
+}
+
+.container-narrow {
+  max-width: 960px;
+}
+
+.container-wide {
+  max-width: 1536px;
+}
+
+/**
+ * Section spacing
+ * - Consistent vertical spacing for page sections
+ */
+.section {
+  padding-block: 4rem;
+  
+  @include respond-to('md') {
+    padding-block: 6rem;
+  }
+  
+  @include respond-to('lg') {
+    padding-block: 8rem;
+  }
+}
+
+/**
+ * Gradient text utility
+ * - Creates gradient text effect
+ */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/**
+ * Glass morphism card
+ * - Frosted glass effect
+ */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+  .dark & {
+    background: rgba(23, 23, 23, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ==========================================================================
+// SELECTION STYLES
+// ==========================================================================
+
+::selection {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+// ==========================================================================
+// SCROLLBAR STYLING (Webkit browsers)
+// ==========================================================================
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  
+  &:hover {
+    background: var(--color-text-muted);
+  }
+}
+
+// Firefox scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-bg-secondary);
+}

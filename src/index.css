@@ -1,0 +1,220 @@
+/**
+ * ==========================================================================
+ * MAIN CSS ENTRY POINT
+ * ==========================================================================
+ * 
+ * This file imports all styles in the correct order:
+ * 1. Custom global SCSS styles (must come first for @import)
+ * 2. Tailwind base styles (CSS reset and defaults)
+ * 3. Tailwind component classes
+ * 4. Tailwind utility classes
+ * 
+ * The order is important - Tailwind utilities should come last
+ * to ensure they can override other styles when needed.
+ */
+
+/* Import our custom global SCSS styles FIRST
+   - CSS custom properties
+   - Base element styles
+   - Utility classes
+   - @import must precede @tailwind directives
+*/
+@import './styles/globals.scss';
+
+/* Tailwind Base Layer
+   - Includes Preflight (CSS reset)
+   - Sets baseline styles for HTML elements
+*/
+@tailwind base;
+
+/* Tailwind Components Layer
+   - Reusable component classes
+   - Can be extended with @layer components {}
+*/
+@tailwind components;
+
+/* Tailwind Utilities Layer
+   - All utility classes (flex, p-4, text-lg, etc.)
+   - Highest specificity, overrides everything above
+*/
+@tailwind utilities;
+
+/* ==========================================================================
+   CUSTOM COMPONENT STYLES
+   ==========================================================================
+   Using @layer components to add custom component classes
+   that integrate with Tailwind's design system
+*/
+@layer components {
+  /**
+   * Primary Button Component
+   * - Solid background with hover effects
+   * - Accessible focus states
+   */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-xl
+           bg-primary-500 text-white font-medium
+           transition-all duration-300
+           hover:bg-primary-600 hover:shadow-glow
+           focus-visible:outline-none focus-visible:ring-2 
+           focus-visible:ring-primary-500 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /**
+   * Secondary Button Component
+   * - Outline style with transparent background
+   */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-xl
+           border-2 border-primary-500 text-primary-500 font-medium
+           transition-all duration-300
+           hover:bg-primary-500 hover:text-white
+           focus-visible:outline-none focus-visible:ring-2 
+           focus-visible:ring-primary-500 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /**
+   * Accent Button Component
+   * - Uses accent color for high-emphasis actions
+   */
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-xl
+           bg-accent-500 text-white font-medium
+           transition-all duration-300
+           hover:bg-accent-600 hover:shadow-glow-accent
+           focus-visible:outline-none focus-visible:ring-2 
+           focus-visible:ring-accent-500 focus-visible:ring-offset-2;
+  }
+
+  /**
+   * Card Component
+   * - Clean card with subtle shadow
+   * - Hover lift effect
+   */
+  .card {
+    @apply bg-white dark:bg-neutral-900
+           rounded-2xl p-6
+           border border-neutral-100 dark:border-neutral-800
+           shadow-soft
+           transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:-translate-y-1 hover:shadow-soft-lg;
+  }
+
+  /**
+   * Badge Component
+   * - Small tag-like element
+   */
+  .badge {
+    @apply inline-flex items-center
+           px-3 py-1 rounded-full
+           text-sm font-medium
+           bg-primary-100 text-primary-700
+           dark:bg-primary-900 dark:text-primary-300;
+  }
+
+  /**
+   * Input Component
+   * - Form input with focus states
+   */
+  .input,
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl
+           bg-neutral-50 dark:bg-neutral-800
+           border border-neutral-200 dark:border-neutral-700
+           text-neutral-900 dark:text-neutral-100
+           placeholder:text-neutral-400
+           transition-all duration-200
+           focus:outline-none focus:ring-2 
+           focus:ring-primary-500 focus:border-transparent;
+  }
+
+  /**
+   * Select dropdown styling
+   * - Custom appearance for select elements
+   */
+  select.input-field {
+    @apply appearance-none cursor-pointer
+           bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNCA2TDggMTBMMTIgNiIgc3Ryb2tlPSIjNzE3MTcxIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+')]
+           bg-no-repeat bg-[right_1rem_center];
+  }
+
+  /**
+   * Section heading style
+   * - For page section titles
+   */
+  .section-heading {
+    @apply text-display-md font-display font-semibold
+           text-neutral-900 dark:text-white
+           mb-4;
+  }
+
+  .section-subheading {
+    @apply text-lg text-neutral-600 dark:text-neutral-400
+           max-w-2xl;
+  }
+}
+
+/* ==========================================================================
+   CUSTOM UTILITY CLASSES
+   ==========================================================================
+   Using @layer utilities to add custom utilities
+   that can be used with responsive and state variants
+*/
+@layer utilities {
+  /**
+   * Text balance utility for better heading wrapping
+   */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /**
+   * Hide scrollbar utility
+   */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /**
+   * Animation delay utilities
+   * - For staggered animations
+   */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  /**
+   * Safe area padding utilities for notched devices
+   */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+}

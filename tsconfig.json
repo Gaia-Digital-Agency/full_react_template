@@ -1,0 +1,54 @@
+{
+  /**
+   * ==========================================================================
+   * TYPESCRIPT CONFIGURATION
+   * ==========================================================================
+   * 
+   * Configures TypeScript compiler for React + Vite project with:
+   * - Strict type checking for better code quality
+   * - Path aliases matching vite.config.ts
+   * - Modern ES module support
+   * - JSX support for React components
+   */
+  "compilerOptions": {
+    /* ----- Target & Module Settings ----- */
+    "target": "ES2020",                          /* Compile to ES2020 for modern browser support */
+    "useDefineForClassFields": true,             /* Use ECMAScript standard class fields */
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],    /* Include DOM types for web development */
+    "module": "ESNext",                          /* Use ES modules */
+    "skipLibCheck": true,                        /* Skip type checking of declaration files for faster builds */
+
+    /* ----- Bundler Mode Settings ----- */
+    "moduleResolution": "bundler",               /* Use bundler-style module resolution */
+    "allowImportingTsExtensions": true,          /* Allow .ts/.tsx imports */
+    "resolveJsonModule": true,                   /* Allow importing JSON files */
+    "isolatedModules": true,                     /* Each file is a separate module */
+    "noEmit": true,                              /* Don't emit JS files (Vite handles this) */
+    "jsx": "react-jsx",                          /* Use new JSX transform (React 17+) */
+
+    /* ----- Strict Type Checking ----- */
+    "strict": true,                              /* Enable all strict type checks */
+    "noUnusedLocals": true,                      /* Error on unused variables */
+    "noUnusedParameters": true,                  /* Error on unused function parameters */
+    "noFallthroughCasesInSwitch": true,          /* Require break/return in switch cases */
+    "forceConsistentCasingInFileNames": true,    /* Enforce consistent file name casing */
+
+    /* ----- Path Aliases (must match vite.config.ts) ----- */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@types/*": ["./src/types/*"]
+    }
+  },
+  
+  /* ----- Files to Include ----- */
+  "include": ["src"],
+  
+  /* ----- Files to Exclude ----- */
+  "exclude": ["node_modules", "dist"]
+}

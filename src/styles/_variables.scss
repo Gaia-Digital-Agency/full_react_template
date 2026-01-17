@@ -1,0 +1,220 @@
+/**
+ * ==========================================================================
+ * SCSS VARIABLES & MIXINS
+ * ==========================================================================
+ * 
+ * Centralized design tokens and reusable mixins for consistent styling.
+ * This file is auto-imported into all SCSS files via vite.config.ts
+ * 
+ * Contents:
+ * - Color variables
+ * - Typography scales
+ * - Spacing values
+ * - Breakpoint mixins
+ * - Animation utilities
+ */
+
+// ==========================================================================
+// COLOR PALETTE
+// ==========================================================================
+
+// Primary brand colors - Deep teal for professionalism
+$color-primary-50: #edfcf9;
+$color-primary-100: #d2f7f0;
+$color-primary-200: #a9eee2;
+$color-primary-300: #72ded0;
+$color-primary-400: #3ac6b8;
+$color-primary-500: #1ea89e;  // Main brand color
+$color-primary-600: #158882;
+$color-primary-700: #156d69;
+$color-primary-800: #165755;
+$color-primary-900: #174847;
+$color-primary-950: #072b2b;
+
+// Accent colors - Vibrant coral for CTAs
+$color-accent-500: #fe4f11;
+$color-accent-600: #ef3507;
+$color-accent-400: #ff7038;
+
+// Neutral colors
+$color-neutral-50: #fafafa;
+$color-neutral-100: #f5f5f5;
+$color-neutral-200: #e5e5e5;
+$color-neutral-800: #262626;
+$color-neutral-900: #171717;
+$color-neutral-950: #0a0a0a;
+
+// ==========================================================================
+// TYPOGRAPHY
+// ==========================================================================
+
+// Font families
+$font-display: 'Sora', system-ui, sans-serif;
+$font-body: 'DM Sans', system-ui, sans-serif;
+$font-mono: 'JetBrains Mono', Consolas, monospace;
+
+// Font weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// ==========================================================================
+// SPACING SCALE
+// ==========================================================================
+
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+$spacing-4xl: 6rem;     // 96px
+
+// ==========================================================================
+// BREAKPOINTS
+// ==========================================================================
+
+$breakpoint-xs: 375px;   // Small phones
+$breakpoint-sm: 640px;   // Large phones
+$breakpoint-md: 768px;   // Tablets
+$breakpoint-lg: 1024px;  // Small laptops
+$breakpoint-xl: 1280px;  // Desktop
+$breakpoint-2xl: 1536px; // Large desktop
+
+// ==========================================================================
+// RESPONSIVE MIXINS
+// ==========================================================================
+
+/**
+ * Mobile-first responsive mixin
+ * Usage: @include respond-to('md') { ... }
+ */
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'xs' {
+    @media (min-width: $breakpoint-xs) { @content; }
+  } @else if $breakpoint == 'sm' {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == 'md' {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == 'lg' {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == 'xl' {
+    @media (min-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == '2xl' {
+    @media (min-width: $breakpoint-2xl) { @content; }
+  }
+}
+
+/**
+ * Max-width media query for targeting specific sizes and below
+ * Usage: @include respond-max('md') { ... }
+ */
+@mixin respond-max($breakpoint) {
+  @if $breakpoint == 'xs' {
+    @media (max-width: $breakpoint-xs - 1px) { @content; }
+  } @else if $breakpoint == 'sm' {
+    @media (max-width: $breakpoint-sm - 1px) { @content; }
+  } @else if $breakpoint == 'md' {
+    @media (max-width: $breakpoint-md - 1px) { @content; }
+  } @else if $breakpoint == 'lg' {
+    @media (max-width: $breakpoint-lg - 1px) { @content; }
+  } @else if $breakpoint == 'xl' {
+    @media (max-width: $breakpoint-xl - 1px) { @content; }
+  }
+}
+
+// ==========================================================================
+// UTILITY MIXINS
+// ==========================================================================
+
+/**
+ * Flex center shorthand
+ */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/**
+ * Absolute positioning fill parent
+ */
+@mixin absolute-fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/**
+ * Text truncation with ellipsis
+ */
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/**
+ * Smooth transition shorthand
+ */
+@mixin transition($properties: all, $duration: 0.3s, $timing: ease) {
+  transition: $properties $duration $timing;
+}
+
+/**
+ * Focus visible styles for accessibility
+ */
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-primary-500;
+    outline-offset: 2px;
+  }
+}
+
+/**
+ * Glass morphism effect
+ */
+@mixin glass-effect($blur: 10px, $opacity: 0.8) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+// ==========================================================================
+// ANIMATION MIXINS
+// ==========================================================================
+
+/**
+ * Fade in animation
+ */
+@mixin fade-in($duration: 0.5s, $delay: 0s) {
+  animation: fadeIn $duration ease-out $delay forwards;
+  opacity: 0;
+}
+
+/**
+ * Slide up animation
+ */
+@mixin slide-up($duration: 0.6s, $delay: 0s) {
+  animation: slideUp $duration ease-out $delay forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+// Keyframes
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
