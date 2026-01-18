@@ -50,47 +50,34 @@ const itemVariants = {
  */
 export default function Hero(): JSX.Element {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* ----- Background Decorations ----- */}
-      {/* Gradient blobs for visual interest */}
-      <div className="absolute inset-0 -z-10">
-        {/* Top-right gradient blob */}
-        <div 
-          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(30, 168, 158, 0.4) 0%, transparent 70%)',
-          }}
-        />
-        {/* Bottom-left gradient blob */}
-        <div 
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full opacity-20 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(254, 79, 17, 0.3) 0%, transparent 70%)',
-          }}
-        />
-        {/* Grid pattern overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), 
-                             linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
-          }}
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #1a73e8 0%, #0b57d0 100%)',
+      }}
+    >
+      {/* ----- Background Logo Watermark ----- */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
+        <img
+          src="/assets/gaia_logo.jpeg"
+          alt=""
+          className="w-[300px] md:w-[400px] lg:w-[500px] h-auto rounded-xl opacity-25"
         />
       </div>
 
       {/* ----- Main Content ----- */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="max-w-4xl mx-auto text-center"
         >
+
           {/* Badge */}
           <motion.div variants={itemVariants}>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6">
-              <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse" />
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
+              <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
               Professional Web Development
             </span>
           </motion.div>
@@ -98,17 +85,18 @@ export default function Hero(): JSX.Element {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-display-xl font-display font-bold text-neutral-900 dark:text-white mb-6"
+            className="text-display-xl font-display font-bold text-white mb-6"
+            style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)' }}
           >
             Build Stunning{' '}
-            <span className="gradient-text">Digital Experiences</span>{' '}
+            <span className="text-white/90">Digital Experiences</span>{' '}
             That Convert
           </motion.h1>
 
           {/* Subheadline */}
           <motion.p
             variants={itemVariants}
-            className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-10"
+            className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-10"
           >
             We specialize in crafting high-performance websites and applications 
             that help businesses stand out in the digital landscape.
@@ -121,7 +109,7 @@ export default function Hero(): JSX.Element {
           >
             <Link
               to="/contact"
-              className="btn-primary text-lg px-8 py-4 group"
+              className="inline-flex items-center gap-2 bg-white text-blue-600 hover:bg-white/90 text-lg px-8 py-4 rounded-lg font-semibold transition-all hover:-translate-y-0.5 shadow-lg group"
             >
               Start Your Project
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -129,7 +117,7 @@ export default function Hero(): JSX.Element {
 
             <Link
               to="/products"
-              className="btn-secondary text-lg px-8 py-4 group"
+              className="inline-flex items-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-4 rounded-lg font-semibold transition-all group"
             >
               <Play className="w-5 h-5" />
               View Our Work
@@ -139,18 +127,18 @@ export default function Hero(): JSX.Element {
           {/* Trust Indicators */}
           <motion.div
             variants={itemVariants}
-            className="mt-16 pt-12 border-t border-neutral-200 dark:border-neutral-800"
+            className="mt-16 pt-12 border-t border-white/20"
           >
-            <p className="text-sm text-neutral-500 dark:text-neutral-500 mb-6">
+            <p className="text-sm text-white/70 mb-6">
               Trusted by companies worldwide
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 opacity-50">
+            <div className="flex flex-wrap items-center justify-center gap-8">
               {/* Placeholder logos - replace with actual client logos */}
               {['TechCorp', 'StartupX', 'MediaFlow', 'DataPro', 'CloudNet'].map(
                 (company) => (
                   <div
                     key={company}
-                    className="text-xl font-display font-bold text-neutral-400"
+                    className="text-xl font-display font-bold text-white/50"
                   >
                     {company}
                   </div>
@@ -168,11 +156,11 @@ export default function Hero(): JSX.Element {
         transition={{ delay: 1.5, duration: 0.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <div className="w-6 h-10 border-2 border-neutral-300 dark:border-neutral-700 rounded-full flex justify-center p-2">
+        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center p-2">
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-1.5 h-1.5 bg-primary-500 rounded-full"
+            className="w-1.5 h-1.5 bg-white rounded-full"
           />
         </div>
       </motion.div>

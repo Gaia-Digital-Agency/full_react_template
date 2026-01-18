@@ -53,10 +53,10 @@ export default defineConfig({
 
   /* ----- Development Server Settings ----- */
   server: {
-    port: 3000,           /* Default dev server port */
-    open: true,           /* Auto-open browser on start */
+    port: 5171,           /* Default dev server port */
+    open: false,          /* Don't auto-open browser (cockpit handles navigation) */
     host: true,           /* Listen on all network interfaces */
-    strictPort: false,    /* Try next port if 3000 is in use */
+    strictPort: true,     /* Must use this specific port */
   },
 
   /* ----- Production Build Configuration ----- */
